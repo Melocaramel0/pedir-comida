@@ -1,0 +1,38 @@
+@use"./../../../../assets/styles/variables.scss";
+
+header{
+    height: 80px;
+    background-color: variables.$color-principal !important;
+    border-radius: 0 0 15px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    transition: 500ms ease-in-out;
+}
+
+h1{
+    font-size: xx-large;
+    font-weight: 800;
+    color: rgb(0, 0, 0); 
+    margin-bottom: 20px;
+}
+
+.extendido{
+    height: 150px;
+}
+
+
+.fade-in{
+    animation: fade 300ms ease-in-out;
+}
+
+.fade-out{
+    animation: fade 300ms ease-in-out ease-in-out backwards;
+}
+
+@keyframes fade-out {
+    100%{
+        opacity: 0;
+    }
+}
+

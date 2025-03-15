@@ -1,6 +1,15 @@
+<!-- Banner principal con imagen de fondo -->
+<section class="banner" [class.hidden]="!seleccionado[0]">
+  <div class="banner-background"></div>
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <h1>¡Pide tu comida favorita!</h1>
+    <p>Entrega rápida y segura a tu domicilio</p>
+    <button class="btn-primary">Ordenar ahora</button>
+  </div>
+</section>
 
 <div id="container-tabs">
-
     <div class="tab" (click)="navegar('')" [ngClass]="{seleccionado: seleccionado[0]}">
         <svg height="45px" width="45px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg"
             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve">

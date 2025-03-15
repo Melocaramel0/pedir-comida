@@ -1,1 +1,42 @@
-<p>home works!</p>
+<div class="home-container">
+  <!-- Categorías de comida -->
+  <section class="categories">
+    <h2>Categorías</h2>
+    <div class="categories-grid">
+      <div class="category-card" *ngFor="let category of categories" (click)="navigateToCategory(category.name)">
+        <div class="category-icon">{{ category.icon }}</div>
+        <span>{{ category.name }}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Restaurantes destacados -->
+  <section class="featured-restaurants">
+    <h2>Restaurantes destacados</h2>
+    <div class="restaurant-list">
+      <div class="restaurant-card" *ngFor="let restaurant of restaurants" (click)="navigateToRestaurant(restaurant)">
+        <div class="restaurant-image" [style.background-image]="'url(' + restaurant.image + ')'"></div>
+        <div class="restaurant-info">
+          <h3>{{ restaurant.name }}</h3>
+          <p>⭐ {{ restaurant.rating }} ({{ restaurant.reviews }}+ reseñas)</p>
+          <p>🕒 {{ restaurant.deliveryTime }} • 💰 {{ restaurant.priceLevel }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ofertas especiales -->
+  <section class="special-offers">
+    <h2>Ofertas especiales</h2>
+    <div class="offers-list">
+      <div class="offer-card" *ngFor="let offer of offers">
+        <div class="offer-image" [style.background-image]="'url(' + offer.image + ')'"></div>
+        <div class="offer-info">
+          <h3>{{ offer.title }}</h3>
+          <p>{{ offer.validUntil }}</p>
+          <button class="btn-secondary" (click)="viewOffer(offer)">Ver oferta</button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

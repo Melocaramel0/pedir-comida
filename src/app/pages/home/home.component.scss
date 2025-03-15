@@ -1,0 +1,141 @@
+@use "../../../assets/styles/variables";
+
+.home-container {
+  padding-bottom: 70px; // Espacio para la barra de tabs
+}
+
+// Secciones comunes
+section {
+  padding: 15px;
+  margin-bottom: 20px;
+  
+  h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: bold;
+  }
+}
+
+// Categorías
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  
+  .category-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 10px;
+    padding: 15px 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+    .category-icon {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+    
+    span {
+      font-size: 12px;
+      text-align: center;
+    }
+  }
+}
+
+// Restaurantes
+.restaurant-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  
+  .restaurant-card {
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+    .restaurant-image {
+      width: 100px;
+      height: 100px;
+      background-color: #ddd;
+      background-size: cover;
+    }
+    
+    .restaurant-info {
+      padding: 10px;
+      flex: 1;
+      
+      h3 {
+        font-size: 16px;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      
+      p {
+        font-size: 12px;
+        margin-bottom: 3px;
+        color: #666;
+      }
+    }
+  }
+}
+
+// Ofertas
+.offers-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  
+  .offer-card {
+    display: flex;
+    background-color: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    
+    .offer-image {
+      width: 100px;
+      height: 100px;
+      background-color: #ddd;
+      background-size: cover;
+    }
+    
+    .offer-info {
+      padding: 10px;
+      flex: 1;
+      
+      h3 {
+        font-size: 16px;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      
+      p {
+        font-size: 12px;
+        margin-bottom: 8px;
+        color: #666;
+      }
+      
+      .btn-secondary {
+        background-color: variables.$color-principal;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 15px;
+        font-size: 12px;
+        cursor: pointer;
+        transition: background-color 0.2s ease, transform 0.1s ease;
+        
+        &:hover {
+          background-color: darken(variables.$color-principal, 5%);
+        }
+        
+        &:active {
+          transform: scale(0.98);
+        }
+      }
+    }
+  }
+}
