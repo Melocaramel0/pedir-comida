@@ -1,0 +1,196 @@
+<div class="restaurante-container">
+  <!-- Imagen de cabecera del restaurante -->
+  <div class="restaurante-header" [style.background-image]="'url(' + restaurant.coverImage + ')'">
+    <div class="header-overlay">
+      <div class="back-button" (click)="goBack()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" fill="currentColor"/>
+        </svg>
+      </div>
+      <div class="header-actions">
+        <button class="action-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="currentColor"/>
+          </svg>
+        </button>
+        <button class="action-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Información del restaurante -->
+  <div class="restaurante-info">
+    <div class="logo-container">
+      <img [src]="restaurant.logo" alt="Logo del restaurante" class="restaurant-logo">
+    </div>
+    <h1 class="restaurant-name">{{ restaurant.name }}</h1>
+    <div class="restaurant-meta">
+      <div class="meta-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" fill="currentColor"/>
+        </svg>
+        <span>{{ restaurant.rating }} ({{ restaurant.reviewCount }})</span>
+      </div>
+      <div class="meta-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z" fill="currentColor"/>
+          <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z" fill="currentColor"/>
+        </svg>
+        <span>{{ restaurant.deliveryTime }}</span>
+      </div>
+      <div class="meta-item">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z" fill="currentColor"/>
+        </svg>
+        <span>{{ restaurant.distance }} km</span>
+      </div>
+    </div>
+    <p class="restaurant-description">{{ restaurant.description }}</p>
+  </div>
+
+  <!-- Categorías de menú -->
+  <div class="menu-categories">
+    <div class="category-tabs">
+      <button 
+        *ngFor="let category of menuCategories" 
+        class="category-tab" 
+        [class.active]="activeCategory === category"
+        (click)="setActiveCategory(category)">
+        {{ category }}
+      </button>
+    </div>
+  </div>
+
+  <!-- Lista de platos -->
+  <div class="menu-items">
+    <div *ngFor="let item of filteredMenuItems" class="menu-item" (click)="openDishDetails(item)">
+      <div class="item-details">
+        <h3 class="item-name">{{ item.name }}</h3>
+        <p class="item-description">{{ item.description }}</p>
+        <p class="item-price">${{ item.price.toFixed(2) }}</p>
+      </div>
+      <div class="item-image" *ngIf="item.image">
+        <img [src]="item.image" [alt]="item.name">
+        <button class="add-to-cart-btn" (click)="addToCart(item, $event)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Información adicional -->
+  <div class="additional-info">
+    <div class="info-section">
+      <h2>Horario</h2>
+      <div class="schedule">
+        <div class="schedule-day" *ngFor="let day of restaurant.schedule">
+          <span class="day-name">{{ day.day }}</span>
+          <span class="day-hours">{{ day.hours }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h2>Dirección</h2>
+      <p class="address">{{ restaurant.address }}</p>
+      <div class="map-container">
+        <!-- Aquí iría un mapa, pero por ahora solo ponemos una imagen placeholder -->
+        <img src="https://maps.googleapis.com/maps/api/staticmap?center={{ restaurant.address }}&zoom=15&size=600x300&markers=color:red%7C{{ restaurant.address }}&key=YOUR_API_KEY" alt="Mapa" class="map-image">
+      </div>
+    </div>
+
+    <div class="info-section">
+      <h2>Reseñas</h2>
+      <div class="reviews">
+        <div class="review" *ngFor="let review of restaurant.reviews.slice(0, 3)">
+          <div class="review-header">
+            <div class="reviewer-info">
+              <img [src]="review.userImage" alt="Usuario" class="reviewer-image">
+              <div class="reviewer-details">
+                <h4>{{ review.userName }}</h4>
+                <div class="review-rating">
+                  <span class="stars">
+                    <span *ngFor="let star of [1, 2, 3, 4, 5]" class="star" [class.filled]="star <= review.rating">★</span>
+                  </span>
+                  <span class="review-date">{{ review.date }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="review-text">{{ review.comment }}</p>
+        </div>
+        <button class="view-all-btn" *ngIf="restaurant.reviews.length > 3">Ver todas las reseñas ({{ restaurant.reviews.length }})</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón flotante para ver el carrito -->
+  <div class="cart-button" *ngIf="cartItemCount > 0" (click)="viewCart()">
+    <div class="cart-icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z" fill="currentColor"/>
+      </svg>
+    </div>
+    <div class="cart-count">{{ cartItemCount }}</div>
+    <div class="cart-total">${{ cartTotal.toFixed(2) }}</div>
+    <div class="cart-text">Ver carrito</div>
+  </div>
+</div>
+
+<!-- Modal de detalles del plato -->
+<div class="dish-modal" *ngIf="selectedDish" (click)="closeDishDetails($event)">
+  <div class="dish-modal-content" (click)="$event.stopPropagation()">
+    <button class="close-modal-btn" (click)="closeDishDetails()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" fill="currentColor"/>
+      </svg>
+    </button>
+    
+    <div class="dish-image" *ngIf="selectedDish.image">
+      <img [src]="selectedDish.image" [alt]="selectedDish.name">
+    </div>
+    
+    <div class="dish-details">
+      <h2>{{ selectedDish.name }}</h2>
+      <p class="dish-description">{{ selectedDish.description }}</p>
+      <p class="dish-price">${{ selectedDish.price.toFixed(2) }}</p>
+      
+      <div class="dish-options" *ngIf="selectedDish.options && selectedDish.options.length > 0">
+        <h3>Opciones</h3>
+        <div class="option-group" *ngFor="let optionGroup of selectedDish.options">
+          <h4>{{ optionGroup.name }} <span *ngIf="optionGroup.required" class="required-tag">Obligatorio</span></h4>
+          <div class="option-items">
+            <div class="option-item" *ngFor="let option of optionGroup.items">
+              <div class="option-checkbox">
+                <input 
+                  [type]="optionGroup.multiple ? 'checkbox' : 'radio'" 
+                  [name]="optionGroup.name" 
+                  [id]="option.id" 
+                  [(ngModel)]="option.selected">
+                <label [for]="option.id">{{ option.name }}</label>
+              </div>
+              <span class="option-price" *ngIf="option.additionalPrice > 0">+${{ option.additionalPrice.toFixed(2) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="special-instructions">
+        <h3>Instrucciones especiales</h3>
+        <textarea placeholder="Ej. Sin cebolla, salsa aparte, etc." [(ngModel)]="specialInstructions"></textarea>
+      </div>
+      
+      <div class="quantity-selector">
+        <button class="quantity-btn" (click)="decreaseQuantity()">-</button>
+        <span class="quantity">{{ quantity }}</span>
+        <button class="quantity-btn" (click)="increaseQuantity()">+</button>
+      </div>
+      
+      <button class="add-to-cart-btn-large" (click)="addToCartFromModal()">
+        Agregar al carrito - ${{ getTotalPrice().toFixed(2) }}
+      </button>
+    </div>
+  </div>
+</div>

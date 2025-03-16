@@ -1,1 +1,67 @@
-<p>buscar works!</p>
+<div class="buscar-container">
+  <div class="search-box">
+    <input type="text" placeholder="Buscar restaurantes o comidas..." [(ngModel)]="searchTerm" (keyup.enter)="search()">
+    <button class="search-button" (click)="search()">
+      <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z" stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <div class="filters">
+    <div class="filter-item" [class.active]="activeFilter === 'all'" (click)="setFilter('all')">Todos</div>
+    <div class="filter-item" [class.active]="activeFilter === 'restaurants'" (click)="setFilter('restaurants')">Restaurantes</div>
+    <div class="filter-item" [class.active]="activeFilter === 'dishes'" (click)="setFilter('dishes')">Platos</div>
+  </div>
+
+  <div class="search-results" *ngIf="searchResults.length > 0">
+    <h2>Resultados de búsqueda</h2>
+    
+    <div class="restaurant-list" *ngIf="activeFilter !== 'dishes'">
+      <div class="restaurant-card" *ngFor="let restaurant of filteredRestaurants" (click)="navigateToRestaurant(restaurant)">
+        <div class="restaurant-image" [style.background-image]="'url(' + restaurant.image + ')'"></div>
+        <div class="restaurant-info">
+          <h3>{{ restaurant.name }}</h3>
+          <p>⭐ {{ restaurant.rating }} ({{ restaurant.reviews }}+ reseñas)</p>
+          <p>🕒 {{ restaurant.deliveryTime }} • 💰 {{ restaurant.priceLevel }}</p>
+        </div>
+      </div>
+    </div>
+    
+    <div class="dishes-list" *ngIf="activeFilter !== 'restaurants'">
+      <div class="dish-card" *ngFor="let dish of filteredDishes" (click)="navigateToDish(dish)">
+        <div class="dish-image" [style.background-image]="'url(' + dish.image + ')'"></div>
+        <div class="dish-info">
+          <h3>{{ dish.name }}</h3>
+          <p class="restaurant">{{ dish.restaurant }}</p>
+          <p class="price">{{ dish.price }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-results" *ngIf="searched && searchResults.length === 0">
+    <div class="no-results-icon">🔍</div>
+    <h3>No se encontraron resultados</h3>
+    <p>Intenta con otra búsqueda o navega por categorías</p>
+  </div>
+
+  <div class="recent-searches" *ngIf="!searched">
+    <h2>Búsquedas recientes</h2>
+    <div class="recent-search-list">
+      <div class="recent-search-item" *ngFor="let search of recentSearches" (click)="applyRecentSearch(search)">
+        <span class="search-icon">🕒</span>
+        <span class="search-term">{{ search }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="popular-searches" *ngIf="!searched">
+    <h2>Búsquedas populares</h2>
+    <div class="popular-search-list">
+      <div class="popular-search-item" *ngFor="let search of popularSearches" (click)="applyRecentSearch(search)">
+        <span class="search-term">{{ search }}</span>
+      </div>
+    </div>
+  </div>
+</div>

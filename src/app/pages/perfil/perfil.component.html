@@ -1,1 +1,172 @@
-<p>perfil works!</p>
+<div class="perfil-container">
+  <div class="perfil-header">
+    <div class="user-avatar">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Foto de perfil">
+      <button class="edit-avatar-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+    <h1>{{ user.name }}</h1>
+    <p>{{ user.email }}</p>
+  </div>
+
+  <div class="profile-sections">
+    <div class="profile-section">
+      <h2>Información Personal</h2>
+      <div class="section-content">
+        <div class="form-group">
+          <label>Nombre completo</label>
+          <input type="text" [(ngModel)]="user.name" placeholder="Tu nombre">
+        </div>
+        <div class="form-group">
+          <label>Correo electrónico</label>
+          <input type="email" [(ngModel)]="user.email" placeholder="tu@email.com">
+        </div>
+        <div class="form-group">
+          <label>Teléfono</label>
+          <input type="tel" [(ngModel)]="user.phone" placeholder="Tu número de teléfono">
+        </div>
+        <button class="save-btn" (click)="savePersonalInfo()">Guardar cambios</button>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <h2>Direcciones</h2>
+      <div class="section-content">
+        <div class="address-list">
+          <div class="address-card" *ngFor="let address of user.addresses; let i = index">
+            <div class="address-icon">
+              <span *ngIf="address.type === 'home'">🏠</span>
+              <span *ngIf="address.type === 'work'">🏢</span>
+              <span *ngIf="address.type === 'other'">📍</span>
+            </div>
+            <div class="address-details">
+              <p class="address-title">{{ address.title }}</p>
+              <p class="address-text">{{ address.street }}, {{ address.number }}</p>
+              <p class="address-text">{{ address.city }}, {{ address.zipCode }}</p>
+            </div>
+            <div class="address-actions">
+              <button class="edit-btn" (click)="editAddress(i)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="currentColor"/>
+                </svg>
+              </button>
+              <button class="delete-btn" (click)="deleteAddress(i)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" fill="currentColor"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button class="add-btn" (click)="addNewAddress()">
+          <span>+ Agregar nueva dirección</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <h2>Métodos de Pago</h2>
+      <div class="section-content">
+        <div class="payment-list">
+          <div class="payment-card" *ngFor="let payment of user.paymentMethods; let i = index">
+            <div class="payment-icon">
+              <span *ngIf="payment.type === 'visa'">💳</span>
+              <span *ngIf="payment.type === 'mastercard'">💳</span>
+              <span *ngIf="payment.type === 'paypal'">💸</span>
+            </div>
+            <div class="payment-details">
+              <p class="payment-title">{{ payment.name }}</p>
+              <p class="payment-text" *ngIf="payment.type !== 'paypal'">**** **** **** {{ payment.lastDigits }}</p>
+              <p class="payment-text" *ngIf="payment.type === 'paypal'">{{ payment.email }}</p>
+            </div>
+            <div class="payment-actions">
+              <button class="edit-btn" (click)="editPayment(i)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="currentColor"/>
+                </svg>
+              </button>
+              <button class="delete-btn" (click)="deletePayment(i)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" fill="currentColor"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <button class="add-btn" (click)="addNewPayment()">
+          <span>+ Agregar método de pago</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <h2>Historial de Pedidos</h2>
+      <div class="section-content">
+        <div class="orders-list">
+          <div class="order-card" *ngFor="let order of user.orderHistory" (click)="viewOrderDetails(order.id)">
+            <div class="order-header">
+              <div class="order-restaurant">
+                <img [src]="order.restaurantImage" alt="Logo restaurante">
+                <h3>{{ order.restaurantName }}</h3>
+              </div>
+              <div class="order-status" [class]="order.status">
+                {{ order.status }}
+              </div>
+            </div>
+            <div class="order-details">
+              <p class="order-date">{{ order.date | date:'dd/MM/yyyy' }} • {{ order.items.length }} productos</p>
+              <p class="order-total">Total: ${{ order.total.toFixed(2) }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="no-orders" *ngIf="user.orderHistory.length === 0">
+          <div class="no-orders-icon">🍽️</div>
+          <p>Aún no has realizado ningún pedido</p>
+          <button class="explore-btn" routerLink="/">Explorar restaurantes</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <h2>Preferencias</h2>
+      <div class="section-content">
+        <div class="preference-item">
+          <div class="preference-text">
+            <h3>Notificaciones por correo</h3>
+            <p>Recibe actualizaciones sobre tus pedidos y ofertas especiales</p>
+          </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="email-notifications" [(ngModel)]="user.preferences.emailNotifications">
+            <label for="email-notifications"></label>
+          </div>
+        </div>
+        <div class="preference-item">
+          <div class="preference-text">
+            <h3>Notificaciones push</h3>
+            <p>Recibe alertas en tiempo real sobre el estado de tus pedidos</p>
+          </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="push-notifications" [(ngModel)]="user.preferences.pushNotifications">
+            <label for="push-notifications"></label>
+          </div>
+        </div>
+        <div class="preference-item">
+          <div class="preference-text">
+            <h3>Modo oscuro</h3>
+            <p>Cambia la apariencia de la aplicación</p>
+          </div>
+          <div class="toggle-switch">
+            <input type="checkbox" id="dark-mode" [(ngModel)]="user.preferences.darkMode">
+            <label for="dark-mode"></label>
+          </div>
+        </div>
+        <button class="save-btn" (click)="savePreferences()">Guardar preferencias</button>
+      </div>
+    </div>
+
+    <button class="logout-btn" (click)="logout()">Cerrar sesión</button>
+  </div>
+</div>

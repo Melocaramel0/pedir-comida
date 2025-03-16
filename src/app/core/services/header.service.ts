@@ -4,6 +4,7 @@ import { Injectable, signal, WritableSignal } from '@angular/core';
   providedIn: 'root'
 })
 export class HeaderService {
+  mostrarHeader: any;
 
 
   constructor() { }

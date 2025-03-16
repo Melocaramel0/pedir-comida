@@ -1,7 +1,10 @@
 @use "../../../assets/styles/variables";
 
 .home-container {
+  padding-top: 170px; // Espacio para el banner
   padding-bottom: 70px; // Espacio para la barra de tabs
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 // Secciones comunes
@@ -13,32 +16,80 @@ section {
     font-size: 18px;
     margin-bottom: 15px;
     font-weight: bold;
+    display: flex;
+    align-items: center;
+    
+    &::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      background-color: variables.$color-principal;
+      margin-right: 8px;
+      border-radius: 2px;
+    }
   }
 }
 
 // Categorías
 .categories-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
+  padding: 5px;
+  margin-left: -10px; // Ajuste a la izquierda
+  margin-right: -10px; // Compensar el margen izquierdo
+  max-width: calc(100% + 20px); // Compensar los márgenes negativos
+  margin-bottom: 30px; // Aumentar espacio con la sección de restaurantes
+  
+  @media (min-width: 360px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  @media (min-width: 480px) {
+    grid-template-columns: repeat(6, 1fr);
+  }
   
   .category-card {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background-color: white;
-    border-radius: 10px;
-    padding: 15px 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    padding: 10px 6px;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+    aspect-ratio: 1;
+    width: 100%;
+    max-width: 80px; // Limitar el ancho máximo
+    margin: 0 auto;
+    transition: transform 0.2s ease, box-shadow 0.5s ease;
+    
+    &:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 5px 12px rgba(0, 0, 0, 0.15);
+    }
+    
+    &:active {
+      transform: scale(0.98);
+    }
     
     .category-icon {
-      font-size: 30px;
-      margin-bottom: 8px;
+      font-size: 24px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     
     span {
-      font-size: 12px;
+      font-size: 11px;
       text-align: center;
+      line-height: 1.2;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 }
@@ -55,12 +106,28 @@ section {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    &:active {
+      transform: scale(0.99);
+    }
     
     .restaurant-image {
       width: 100px;
       height: 100px;
       background-color: #ddd;
       background-size: cover;
+      background-position: center;
+      
+      @media (min-width: 400px) {
+        width: 120px;
+        height: 120px;
+      }
     }
     
     .restaurant-info {
@@ -77,6 +144,9 @@ section {
         font-size: 12px;
         margin-bottom: 3px;
         color: #666;
+        display: flex;
+        align-items: center;
+        gap: 4px;
       }
     }
   }
@@ -94,39 +164,61 @@ section {
     border-radius: 10px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    
+    &:active {
+      transform: scale(0.99);
+    }
     
     .offer-image {
       width: 100px;
       height: 100px;
       background-color: #ddd;
       background-size: cover;
+      background-position: center;
+      
+      @media (min-width: 400px) {
+        width: 120px;
+        height: 120px;
+      }
     }
     
     .offer-info {
       padding: 10px;
       flex: 1;
+      display: flex;
+      flex-direction: column;
       
       h3 {
         font-size: 16px;
         margin-bottom: 5px;
         font-weight: bold;
+        color: variables.$color-principal;
       }
       
       p {
         font-size: 12px;
         margin-bottom: 8px;
         color: #666;
+        flex-grow: 1;
       }
       
       .btn-secondary {
         background-color: variables.$color-principal;
         color: white;
         border: none;
-        padding: 5px 10px;
-        border-radius: 15px;
+        padding: 8px 12px;
+        border-radius: 20px;
         font-size: 12px;
+        font-weight: 600;
         cursor: pointer;
         transition: background-color 0.2s ease, transform 0.1s ease;
+        align-self: flex-start;
         
         &:hover {
           background-color: darken(variables.$color-principal, 5%);

@@ -1,1 +1,113 @@
-<p>carrito works!</p>
+<div class="carrito-container">
+  <div class="carrito-header">
+    <h1>Tu Pedido</h1>
+  </div>
+
+  <div class="empty-cart" *ngIf="cartItems.length === 0">
+    <div class="empty-cart-icon">🛒</div>
+    <h2>Tu carrito está vacío</h2>
+    <p>Agrega productos para comenzar tu pedido</p>
+    <button class="btn-primary" routerLink="/">Explorar Restaurantes</button>
+  </div>
+
+  <div class="cart-content" *ngIf="cartItems.length > 0">
+    <div class="restaurant-info">
+      <div class="restaurant-image" [style.background-image]="'url(' + restaurant.image + ')'"></div>
+      <div class="restaurant-details">
+        <h2>{{ restaurant.name }}</h2>
+        <p>⭐ {{ restaurant.rating }} • {{ restaurant.deliveryTime }}</p>
+      </div>
+    </div>
+
+    <div class="cart-items">
+      <div class="cart-item" *ngFor="let item of cartItems; let i = index">
+        <div class="item-quantity">
+          <button class="quantity-btn" (click)="decreaseQuantity(i)">-</button>
+          <span>{{ item.quantity }}</span>
+          <button class="quantity-btn" (click)="increaseQuantity(i)">+</button>
+        </div>
+        <div class="item-details">
+          <h3>{{ item.name }}</h3>
+          <p *ngIf="item.options">{{ item.options }}</p>
+        </div>
+        <div class="item-price">
+          ${{ (item.price * item.quantity).toFixed(2) }}
+        </div>
+        <button class="remove-btn" (click)="removeItem(i)">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" fill="currentColor"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="add-more">
+      <button class="btn-outline" routerLink="/">
+        <span>+ Agregar más productos</span>
+      </button>
+    </div>
+
+    <div class="cart-notes">
+      <textarea placeholder="Instrucciones especiales para el restaurante..." [(ngModel)]="specialInstructions"></textarea>
+    </div>
+
+    <div class="cart-summary">
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span>${{ subtotal.toFixed(2) }}</span>
+      </div>
+      <div class="summary-row">
+        <span>Costo de envío</span>
+        <span>${{ deliveryFee.toFixed(2) }}</span>
+      </div>
+      <div class="summary-row">
+        <span>Impuestos</span>
+        <span>${{ tax.toFixed(2) }}</span>
+      </div>
+      <div class="summary-row total">
+        <span>Total</span>
+        <span>${{ total.toFixed(2) }}</span>
+      </div>
+    </div>
+
+    <div class="promo-code">
+      <input type="text" placeholder="Código promocional" [(ngModel)]="promoCode">
+      <button (click)="applyPromoCode()">Aplicar</button>
+    </div>
+
+    <div class="delivery-address">
+      <h3>Dirección de entrega</h3>
+      <div class="address-card" (click)="editAddress()">
+        <div class="address-icon">📍</div>
+        <div class="address-details">
+          <p class="address-title">{{ address.title }}</p>
+          <p class="address-text">{{ address.street }}, {{ address.number }}</p>
+          <p class="address-text">{{ address.city }}, {{ address.zipCode }}</p>
+        </div>
+        <div class="address-edit">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" fill="currentColor"/>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="payment-method">
+      <h3>Método de pago</h3>
+      <div class="payment-options">
+        <div class="payment-option" [class.selected]="selectedPayment === 'card'" (click)="selectPayment('card')">
+          <div class="payment-icon">💳</div>
+          <span>Tarjeta</span>
+        </div>
+        <div class="payment-option" [class.selected]="selectedPayment === 'cash'" (click)="selectPayment('cash')">
+          <div class="payment-icon">💵</div>
+          <span>Efectivo</span>
+        </div>
+      </div>
+    </div>
+
+    <button class="checkout-btn" (click)="checkout()">
+      Realizar Pedido
+    </button>
+  </div>
+</div>

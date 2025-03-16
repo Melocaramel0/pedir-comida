@@ -1,0 +1,233 @@
+@use "../../../assets/styles/variables";
+
+.buscar-container {
+  padding-top: 170px; // Espacio para el banner
+  padding-bottom: 70px; // Espacio para la barra de tabs
+  max-width: 100%;
+  overflow-x: hidden;
+  
+  .search-box {
+    position: relative;
+    margin-bottom: 20px;
+    
+    input {
+      width: 100%;
+      padding: 15px 50px 15px 15px;
+      border-radius: 12px;
+      border: 1px solid #e0e0e0;
+      font-size: 16px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      
+      &:focus {
+        outline: none;
+        border-color: #ff4500;
+        box-shadow: 0 2px 8px rgba(255, 69, 0, 0.1);
+      }
+    }
+    
+    .search-button {
+      position: absolute;
+      right: 5px;
+      top: 5px;
+      background-color: #ff4500;
+      border: none;
+      border-radius: 10px;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+  }
+  
+  .filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    
+    &::-webkit-scrollbar {
+      height: 3px;
+    }
+    
+    &::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 3px;
+    }
+    
+    .filter-item {
+      padding: 8px 16px;
+      background-color: #f5f5f5;
+      border-radius: 20px;
+      font-size: 14px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      
+      &.active {
+        background-color: #ff4500;
+        color: white;
+      }
+    }
+  }
+  
+  h2 {
+    font-size: 18px;
+    margin-bottom: 15px;
+    font-weight: 600;
+  }
+  
+  .restaurant-list, .dishes-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+  }
+  
+  .restaurant-card {
+    display: flex;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    
+    .restaurant-image {
+      width: 100px;
+      height: 100px;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .restaurant-info {
+      padding: 12px;
+      flex: 1;
+      
+      h3 {
+        font-size: 16px;
+        margin: 0 0 5px;
+        font-weight: 600;
+      }
+      
+      p {
+        margin: 3px 0;
+        font-size: 13px;
+        color: #666;
+      }
+    }
+  }
+  
+  .dish-card {
+    display: flex;
+    background-color: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    
+    .dish-image {
+      width: 80px;
+      height: 80px;
+      background-size: cover;
+      background-position: center;
+    }
+    
+    .dish-info {
+      padding: 12px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      
+      h3 {
+        font-size: 16px;
+        margin: 0 0 5px;
+        font-weight: 600;
+      }
+      
+      .restaurant {
+        font-size: 13px;
+        color: #666;
+      }
+      
+      .price {
+        margin-top: auto;
+        font-weight: 600;
+        color: #ff4500;
+      }
+    }
+  }
+  
+  .no-results {
+    text-align: center;
+    padding: 30px 0;
+    
+    .no-results-icon {
+      font-size: 40px;
+      margin-bottom: 15px;
+    }
+    
+    h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    
+    p {
+      color: #666;
+      font-size: 14px;
+    }
+  }
+  
+  .recent-searches, .popular-searches {
+    margin-bottom: 25px;
+    
+    .recent-search-list, .popular-search-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    
+    .recent-search-item {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      
+      .search-icon {
+        margin-right: 10px;
+        opacity: 0.6;
+      }
+      
+      .search-term {
+        font-size: 14px;
+      }
+    }
+    
+    .popular-search-list {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 10px;
+      
+      .popular-search-item {
+        padding: 8px 16px;
+        background-color: #f5f5f5;
+        border-radius: 20px;
+        font-size: 14px;
+        cursor: pointer;
+        
+        &:hover {
+          background-color: #e0e0e0;
+        }
+      }
+    }
+  }
+}

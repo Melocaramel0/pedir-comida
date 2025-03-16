@@ -1,11 +1,57 @@
-<!-- Banner principal con imagen de fondo -->
-<section class="banner" [class.hidden]="!seleccionado[0]">
-  <div class="banner-background"></div>
+<!-- Banner principal con imagen de fondo para Home -->
+<section class="banner home-banner" [class.hidden]="!seleccionado[0]">
+  <div class="banner-background" style="background-image: url('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80');"></div>
   <div class="banner-overlay"></div>
   <div class="banner-content">
     <h1>¡Pide tu comida favorita!</h1>
     <p>Entrega rápida y segura a tu domicilio</p>
     <button class="btn-primary">Ordenar ahora</button>
+  </div>
+</section>
+
+<!-- Banner para la página de búsqueda -->
+<section class="banner search-banner" [class.hidden]="!seleccionado[1]">
+  <div class="banner-background" style="background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <h1>Encuentra lo que buscas</h1>
+    <p>Miles de restaurantes y platos a tu disposición</p>
+    <div class="search-box">
+      <input type="text" placeholder="Buscar restaurantes o comidas...">
+      <button><svg width="20" height="20" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M33.2768 28.9321C34.9961 26.3812 35.9996 23.3078 35.9996 19.9994C35.9996 11.1624 28.8372 3.9994 19.9996 3.9994C11.1633 3.9994 3.99957 11.1631 3.99957 19.9994C3.99957 28.837 11.1626 35.9994 19.9996 35.9994C24.8047 35.9994 29.1142 33.8826 32.0467 30.5304L41.6591 40.1427C42.0745 40.5582 42.0745 41.229 41.6591 41.6445C41.4569 41.8467 41.1888 41.9556 40.9102 41.9556C40.6297 41.9556 40.3616 41.8468 40.1593 41.6445L32.6653 34.1505C32.2748 33.76 31.6416 33.76 31.2511 34.1505C30.8605 34.541 30.8605 35.1742 31.2511 35.5647L38.7451 43.0587C39.3261 43.6398 40.1044 43.9556 40.9102 43.9556C41.7144 43.9556 42.4925 43.6395 43.0733 43.0587C44.2698 41.8622 44.2698 39.925 43.0733 38.7285L33.2768 28.9321Z" fill="white"/>
+      </svg></button>
+    </div>
+  </div>
+</section>
+
+<!-- Banner para la página de carrito -->
+<section class="banner cart-banner" [class.hidden]="!seleccionado[2]">
+  <div class="banner-background" style="background-image: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <h1>Tu carrito de compras</h1>
+    <p>Revisa tus productos y completa tu pedido</p>
+    <div class="cart-summary">
+      <span class="cart-items">3 productos</span>
+      <span class="cart-total">Total: $1,250</span>
+    </div>
+  </div>
+</section>
+
+<!-- Banner para la página de perfil -->
+<section class="banner profile-banner" [class.hidden]="!seleccionado[3]">
+  <div class="banner-background" style="background-image: url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80');"></div>
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <h1>Tu perfil</h1>
+    <p>Gestiona tus datos y pedidos anteriores</p>
+    <div class="profile-avatar">
+      <div class="avatar-circle">
+        <span>JD</span>
+      </div>
+      <span class="profile-name">Juan Doe</span>
+    </div>
   </div>
 </section>
 
